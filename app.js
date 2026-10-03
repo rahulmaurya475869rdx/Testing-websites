@@ -20,7 +20,7 @@ let videoSoundOn = false;
 /* ---------------- Wishlist ---------------- */
 let myWishlist = [];
 let wishlistFilterActive = false;
-const wishlistDeviceFp = getDeviceFingerprint();
+const wishlistDeviceFp = getSimpleDeviceId();
 
 function loadMyWishlist() {
   db.collection("wishlists").doc(wishlistDeviceFp).get().then((doc) => {
