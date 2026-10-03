@@ -1,12 +1,9 @@
 /* =========================================================
-   Rate Us page logic
-   - Real-time count via .get().then(snap.size)
-   - orderBy removed (client-side sort)
-   - escapeHtml null-safe
+   Rate Us — Shree Shiv Alankar Mandir
    ========================================================= */
 
 let selectedStars = 0;
-let myFingerprint = null;
+let myDeviceId = null;
 let hasExistingReview = false;
 
 /* ---------- star picker ---------- */
@@ -30,7 +27,7 @@ function escapeHtml(str) {
   }[m]));
 }
 
-/* ---------- audio/vibration helpers ---------- */
+/* ---------- audio ---------- */
 let __rateusAudioSource = null;
 async function playAudioFromUrl(url) {
   if (!url) return;
@@ -44,12 +41,12 @@ async function playAudioFromUrl(url) {
     source.connect(ctx.destination);
     source.start();
     __rateusAudioSource = source;
-  } catch (e) { /* silent */ }
+  } catch (e) {}
 }
 
 function vibrateOnce() {
   if (!navigator.vibrate) return;
-  navigator.vibrate([300, 150, 300, 150, 300]);
+  navigator.vibrate([300, 150, 300]);
 }
 
 /* ---------- outcome screens ---------- */
@@ -83,7 +80,7 @@ async function showCelebration() {
   const overlay = document.getElementById("rateusCelebrate");
   const fallWrap = document.getElementById("rateusFallWrap");
   fallWrap.innerHTML = "";
-  const emojis = ["⭐", "🌸", "✨", "🌼", "💛"];
+  const emojis = ["⭐", "✨", "💎", "💍", "🌟"];
   for (let i = 0; i < 34; i++) {
     const span = document.createElement("span");
     span.className = "fall-particle";
@@ -114,14 +111,9 @@ function showPlainThanks() {
 
 /* ---------- pre-checks ---------- */
 async function checkAccessAndInit() {
-  myFingerprint = getDeviceFingerprint();
+  myDeviceId = getSimpleDeviceId();
   try {
-    const blockDoc = await db.collection("feedback_blocks").doc(myFingerprint).get();
-    if (blockDoc.exists && blockDoc.data().permanentlyBlocked) {
-      showNotice("Your feedback submission has been permanently blocked.");
-      return;
-    }
-    const existing = await db.collection("reviews").doc(myFingerprint).get();
+    const existing = await db.collection("reviews").doc(myDeviceId).get();
     if (existing.exists) {
       hasExistingReview = true;
       const d = existing.data();
@@ -133,9 +125,7 @@ async function checkAccessAndInit() {
       const hint = document.getElementById("rateusFormStatus");
       hint.textContent = "You've already shared feedback — editing it below will update your entry.";
     }
-  } catch (e) {
-    // Fail open — network hiccup pe genuine customer lock na ho
-  }
+  } catch (e) {}
   document.getElementById("rateusForm").classList.remove("hidden");
 }
 
@@ -157,14 +147,9 @@ document.getElementById("rateusForm").addEventListener("submit", async (e) => {
   statusEl.textContent = "Submitting...";
 
   try {
-    const fp = myFingerprint || getDeviceFingerprint();
+    const deviceId = myDeviceId || getSimpleDeviceId();
 
-    const blockDoc = await db.collection("feedback_blocks").doc(fp).get();
-    if (blockDoc.exists && blockDoc.data().permanentlyBlocked) {
-      showNotice("Your feedback submission has been permanently blocked.");
-      return;
-    }
-
+    // Bad words check
     const badWordsDoc = await db.collection("settings").doc("bad_words").get();
     const badWords = badWordsDoc.exists ? (badWordsDoc.data().words || []) : [];
     const combinedText = (name + " " + description).toLowerCase();
@@ -177,18 +162,12 @@ document.getElementById("rateusForm").addEventListener("submit", async (e) => {
     });
 
     if (hitWord) {
-      await db.collection("feedback_blocks").doc(fp).set({
-        permanentlyBlocked: true,
-        blockedContent: description || name,
-        name: name,
-        blockedAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
       showAbuseAlert();
       return;
     }
 
     const wasNewReview = !hasExistingReview;
-    const reviewRef = db.collection("reviews").doc(fp);
+    const reviewRef = db.collection("reviews").doc(deviceId);
     await reviewRef.set({
       name: name,
       stars: selectedStars,
@@ -196,7 +175,7 @@ document.getElementById("rateusForm").addEventListener("submit", async (e) => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
 
-    await db.collection("reviews_private").doc(fp).set({ address: address }, { merge: true });
+    await db.collection("reviews_private").doc(deviceId).set({ address: address }, { merge: true });
 
     if (wasNewReview) hasExistingReview = true;
 
@@ -265,7 +244,7 @@ function loadReviews() {
   });
 }
 
-/* ---------- total count via .get().size (reliable) ---------- */
+/* ---------- total count ---------- */
 function loadTotalCount() {
   try {
     db.collection("reviews").get().then((snap) => {
@@ -282,5 +261,4 @@ function loadTotalCount() {
 checkAccessAndInit();
 loadReviews();
 loadTotalCount();
-
 setInterval(loadTotalCount, 60 * 1000);
