@@ -1,22 +1,34 @@
 /* =========================================================
-   MBW Shared Helpers — used across ALL pages
-   Load this AFTER firebase-config.js (needs `db`)
+   Shree Shiv Alankar Mandir — Shared Helpers
    ========================================================= */
 
-/* ---------- HTML escape (unified) ---------- */
+/* ---------- HTML escape ---------- */
 function escHtml(str) {
   if (str == null) return "";
   return String(str).replace(/[&<>"']/g, (m) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[m]));
 }
-// Aliases for backwards compatibility with existing code
 var escapeHtml = escHtml;
 var escapeHtmlA = escHtml;
 
-/* ---------- Social icons — uses 3D SVG from icons.js ---------- */
+/* ---------- Simple device ID (localStorage based) ---------- */
+/* Replaces the old canvas+WebGL fingerprint system. */
+function getSimpleDeviceId() {
+  try {
+    let id = localStorage.getItem("ssam_device_id");
+    if (!id) {
+      id = "dev_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem("ssam_device_id", id);
+    }
+    return id;
+  } catch (e) {
+    return "dev_fallback_" + Math.random().toString(36).slice(2, 10);
+  }
+}
+
+/* ---------- Social icons ---------- */
 function socialIconSvg(platform) {
-  // Map Firestore platform key → emoji key (which icons.js understands)
   const emojiMap = {
     youtube:   "▶️",
     instagram: "📸",
@@ -27,14 +39,10 @@ function socialIconSvg(platform) {
     website:   "🌐"
   };
   const emoji = emojiMap[platform] || emojiMap.website;
-
-  // Try 3D icon from icons.js (loaded at runtime by the time this is called)
   if (window.mbwEmojiToSvg) {
     const svg = window.mbwEmojiToSvg(emoji);
     if (svg) return svg;
   }
-
-  // Fallback: simple line-based icons (only used if icons.js hasn't loaded)
   const fallback = {
     youtube:   '<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><polygon points="10,9 10,15 15,12" fill="currentColor"/></svg>',
     instagram: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>',
@@ -47,7 +55,7 @@ function socialIconSvg(platform) {
   return fallback[platform] || fallback.website;
 }
 
-/* ---------- Render social links in footer from Firestore ---------- */
+/* ---------- Render social links ---------- */
 function renderSocialLinksFromFirestore() {
   if (typeof db === "undefined") return;
   var wrap = document.getElementById("socialLinks");
@@ -65,23 +73,20 @@ function renderSocialLinksFromFirestore() {
   }, function () {});
 }
 
-/* ---------- Render footer text content from Firestore ---------- */
+/* ---------- Render footer ---------- */
 function renderFooterFromFirestore() {
   if (typeof db === "undefined") return;
   db.collection("settings").doc("general").get().then(function (doc) {
     var d = doc.exists ? doc.data() : {};
-    var shopName = d.shopName || "Maurya Battery Works";
-    var address = d.address || "Marihan, Mirzapur, Uttar Pradesh - 231210";
+    var shopName = d.shopName || "Shree Shiv Alankar Mandir";
+    var address = d.address || "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur";
 
     var fName = document.getElementById("footerShopName");
     if (fName) fName.textContent = shopName;
-
     var fTag = document.getElementById("footerTagline");
-    if (fTag) fTag.textContent = d.footerTagline || "Trusted power, close to home.";
-
+    if (fTag) fTag.textContent = d.footerTagline || "Timeless jewellery, trusted since generations.";
     var fAddr = document.getElementById("footerAddressLine");
     if (fAddr) fAddr.textContent = address;
-
     var cAddr = document.getElementById("contactAddress");
     if (cAddr) cAddr.textContent = address;
 
