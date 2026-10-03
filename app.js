@@ -1,6 +1,5 @@
 /* =========================================================
-   Maurya Battery Works — customer-facing site logic
-   SEO + SPA + Video + Swipe + Dots + Bulletproof Poster
+   Shree Shiv Alankar Mandir — customer-facing site logic
    ========================================================= */
 
 let allCategories = [];
@@ -116,10 +115,10 @@ window.activateWishlistFilter = activateWishlistFilter;
 window.filterByCategory = filterByCategory;
 window.filterByBrand = filterByBrand;
 
-/* ---------------- Shop settings (data only — footer handled by shared.js) ---------------- */
+/* ---------------- Shop settings ---------------- */
 db.collection("settings").doc("general").get().then((doc) => {
   shopSettings = doc.exists ? doc.data() : {};
-  const shopName = shopSettings.shopName || "Maurya Battery Works";
+  const shopName = shopSettings.shopName || "Shree Shiv Alankar Mandir";
   const shopEl = document.getElementById("shopNameHeading");
   if (shopEl) shopEl.textContent = shopName;
   if (shopSettings.tagline) {
@@ -131,15 +130,15 @@ db.collection("settings").doc("general").get().then((doc) => {
     if (a) a.textContent = shopSettings.address;
   }
   const heroEye = document.getElementById("heroEyebrow");
-  if (heroEye) heroEye.textContent = shopSettings.heroEyebrow || "Trusted since day one";
+  if (heroEye) heroEye.textContent = shopSettings.heroEyebrow || "Timeless since generations";
   const heroHead = document.getElementById("heroHeadline");
-  if (heroHead) heroHead.textContent = shopSettings.heroHeadline || "Power you can count on, every day.";
+  if (heroHead) heroHead.textContent = shopSettings.heroHeadline || "Jewellery that tells your story.";
   const heroDesc = document.getElementById("heroDescription");
   if (heroDesc) heroDesc.textContent = shopSettings.heroDescription ||
-    "Genuine batteries, inverters, coolers, fans, washing machines, and heaters — all backed by warranty.";
+    "Gold, silver and diamond jewellery — hallmark certified, trusted by families.";
 }).catch(() => {});
 
-/* ---------------- Footer + Social links now rendered by shared.js ---------------- */
+/* ---------------- Footer + Social links ---------------- */
 renderFooterFromFirestore();
 renderSocialLinksFromFirestore();
 
@@ -197,7 +196,7 @@ if (heroSlider) {
     items = items.filter(it => it && it.url);
 
     if (!items.length) {
-      heroSlider.innerHTML = '<div class="slider-placeholder">Maurya Battery Works — Authorised Exide Battery Dealer</div>';
+      heroSlider.innerHTML = '<div class="slider-placeholder">Shree Shiv Alankar Mandir — Trusted Jewellery Shop</div>';
       return;
     }
 
@@ -340,7 +339,7 @@ function renderCategoryChips() {
   });
   if (activeBrand) {
     const b = allBrands.find(x => x.id === activeBrand);
-    if (b) chips.push(`<button class="chip chip-brand active" data-brand-chip="1">🔋 ${escHtml(b.name)} ✕</button>`);
+    if (b) chips.push(`<button class="chip chip-brand active" data-brand-chip="1">💎 ${escHtml(b.name)} ✕</button>`);
   }
   chips.push(`<button class="chip wishlist-chip ${wishlistFilterActive ? "active" : ""}" data-cat="__wishlist__">❤ My Wishlist${myWishlist.length ? " (" + myWishlist.length + ")" : ""}</button>`);
   wrap.innerHTML = chips.join("");
@@ -658,15 +657,14 @@ function closeDetail() {
   document.body.classList.remove("detail-open");
   currentDetailProductId = null;
 
-  /* SEO: Restore homepage title, meta, canonical, remove product schemas */
-  document.title = "Maurya Battery Works — Authorised Exide Battery Dealer in Marihan, Mirzapur";
+  document.title = "Shree Shiv Alankar Mandir — Trusted Jewellery Shop in Marihan, Mirzapur";
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute("content",
-      "Maurya Battery Works — Authorised Exide Battery dealer in Marihan, Mirzapur. Sales and service of batteries, inverters, coolers, fans, washing machines and winter heaters.");
+      "Shree Shiv Alankar Mandir — Trusted jewellery shop in Marihan, Mirzapur. Gold, silver and diamond jewellery with hallmark certification.");
   }
   const canonical = document.getElementById("canonicalLink");
-  if (canonical) canonical.setAttribute("href", "https://maurya-battery-works.pages.dev/");
+  if (canonical) canonical.setAttribute("href", "https://shree-shiv-alankar.pages.dev/");
   const oldSchema = document.getElementById("productSchema");
   if (oldSchema) oldSchema.remove();
   const oldBC = document.getElementById("breadcrumbSchema");
@@ -686,13 +684,12 @@ function renderDetail(productId) {
   const p = allProducts.find(x => x.id === productId);
   if (!p) return;
 
-  /* ===== SEO: Dynamic title + meta + canonical + schema ===== */
-  document.title = (p.name || "Product") + " — Maurya Battery Works, Marihan, Mirzapur";
+  document.title = (p.name || "Product") + " — Shree Shiv Alankar Mandir, Marihan, Mirzapur";
 
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute("content",
-      (p.name || "") + " available at Maurya Battery Works, Marihan, Mirzapur. " +
+      (p.name || "") + " available at Shree Shiv Alankar Mandir, Marihan, Mirzapur. " +
       (p.description || "").slice(0, 140) + " Contact us on WhatsApp.");
   }
 
@@ -709,11 +706,11 @@ function renderDetail(productId) {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": p.name,
-      "description": p.description || "Available at Maurya Battery Works, Marihan, Mirzapur.",
+      "description": p.description || "Available at Shree Shiv Alankar Mandir, Marihan, Mirzapur.",
       "image": (p.images && p.images[0]) ? p.images[0] : "",
       "brand": {
         "@type": "Brand",
-        "name": p.brandName || "Exide"
+        "name": p.brandName || "Shree Shiv Alankar Mandir"
       },
       "offers": {
         "@type": "Offer",
@@ -722,13 +719,12 @@ function renderDetail(productId) {
           : "https://schema.org/InStock",
         "seller": {
           "@type": "LocalBusiness",
-          "name": "Maurya Battery Works",
+          "name": "Shree Shiv Alankar Mandir",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Marihan",
-            "addressLocality": "Mirzapur",
-            "addressRegion": "Uttar Pradesh",
-            "postalCode": "231210",
+            "streetAddress": "Robertsganj road, Devpura, Bhawa Bazar",
+            "addressLocality": "Marihan",
+            "addressRegion": "Mirzapur",
             "addressCountry": "IN"
           }
         }
@@ -746,13 +742,12 @@ function renderDetail(productId) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://maurya-battery-works.pages.dev/" },
-      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://maurya-battery-works.pages.dev/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shree-shiv-alankar.pages.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://shree-shiv-alankar.pages.dev/" },
       { "@type": "ListItem", "position": 3, "name": p.name }
     ]
   });
   document.head.appendChild(bc);
-  /* ===== END SEO ===== */
 
   const detailPage = document.getElementById("productDetailPage");
   const images = p.images && p.images.length ? p.images : [""];
@@ -924,6 +919,6 @@ document.addEventListener("visibilitychange", () => {
       const rect = v.getBoundingClientRect();
       if (rect.top < window.innerHeight && rect.bottom > 0) v.play().catch(() => {});
     });
-    setupHeroAutoAdvance();   // 👈 YE NAYI LINE HAI
+    setupHeroAutoAdvance();
   }
 });
