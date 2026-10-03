@@ -1,9 +1,7 @@
-// =====================================================================
-// PASTE YOUR FIREBASE PROJECT KEYS HERE.
-// Get these from: Firebase Console → Project settings → General →
-// "Your apps" → Web app → SDK setup and configuration → Config
-// (Full step-by-step is in README.md)
-// =====================================================================
+/* =========================================================
+   Shree Shiv Alankar Mandir — Firebase + Cloudinary config
+   ========================================================= */
+
 const firebaseConfig = {
   apiKey: "AIzaSyBghagikxhoVpWg6-vyjWGBgpGC9VDJ6Tg",
   authDomain: "gaurav-shop-website.firebaseapp.com",
@@ -15,8 +13,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// =====================================================================
-// CLOUDINARY — used only for photo/video uploads (free, no card needed).
-// =====================================================================
+// *** YE LINE CRITICAL HAI — iske bina `db` kahin bhi defined nahi hoga ***
+const db = firebase.firestore();
+
+// Cloudinary cloud name (uploads Cloudflare Worker se hote hain)
 const CLOUDINARY_CLOUD_NAME = "nanffhss";
-const CLOUDINARY_UPLOAD_PRESET = "shop_uploads";
