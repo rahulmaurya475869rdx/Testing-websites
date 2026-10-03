@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBW Admin Panel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Rahul Maurya — Professional AI-Powered Web Developer and Designer">
+<meta name="designer" content="Rahul Maurya — Professional AI-Powered Web Developer and Designer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700;1,900&family=Poppins:ital,wght@0,400;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <div class="shine-bar shine-bar-top"></div>
+
+  <section id="loginSection" class="admin-login-wrap">
+    <div class="admin-blob blob1"></div>
+    <div class="admin-blob blob2"></div>
+    <div class="login-card">
+      <h1 class="login-title">MBW <span>Admin</span></h1>
+      <p class="login-sub">Authorized access only. Every attempt is recorded.</p>
+      <div id="loginForm">
+        <label for="adminId">Admin ID</label>
+        <input type="text" id="adminId" placeholder="Enter your admin email" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <label for="adminPass">Secret Password</label>
+        <input type="password" id="adminPass" placeholder="••••••••" required autocomplete="new-password">
+        <button type="button" id="loginSubmitBtn">Login</button>
+        <p class="login-error" id="loginError"></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="entry-video-overlay hidden" id="entryVideoOverlay">
+    <video id="entryVideoPlayer" playsinline></video>
+    <button id="entryVideoSkip" class="skip-btn" type="button">Skip</button>
+  </div>
+
+  <section id="dashboardSection" class="dashboard hidden">
+    <aside class="dashboard-sidebar">
+      <h2 class="dash-logo">MBW <span>Admin</span></h2>
+      <nav>
+        <button class="tab-btn active" data-tab="products">Products</button>
+        <button class="tab-btn" data-tab="categories">Categories</button>
+        <button class="tab-btn" data-tab="brands">Brands</button>
+        <button class="tab-btn" data-tab="banner">Banner Slider</button>
+        <button class="tab-btn" data-tab="posters">Posters</button>
+        <button class="tab-btn" data-tab="mainbuttons">Main Buttons</button>
+        <button class="tab-btn" data-tab="about">About Us Page</button>
+        <button class="tab-btn" data-tab="privacy">Privacy Policy</button>
+        <button class="tab-btn" data-tab="terms">Terms &amp; Conditions</button>
+        <button class="tab-btn" data-tab="developer">Developer Page</button>
+        <button class="tab-btn" data-tab="floating">Floating Menu</button>
+        <button class="tab-btn" data-tab="entryvideo">Entry Video</button>
+        <button class="tab-btn" data-tab="blocked">Blocked Logins</button>
+        <button class="tab-btn" data-tab="security">Security Sound</button>
+        <button class="tab-btn" data-tab="settings">Shop Settings</button>
+        <button class="tab-btn" data-tab="eclipse">Eclipse Control</button>
+        <button class="tab-btn" data-tab="social">Social Links</button>
+        <button class="tab-btn" data-tab="reviews">Customer Reviews</button>
+        <button class="tab-btn" data-tab="mastercontrol">🚨 Master Control</button>
+      </nav>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </aside>
+
+    <main class="dashboard-content">
+
+      <!-- Products -->
+      <div class="tab-panel active" id="tab-products">
+        <h2 class="section-title">Add Product</h2>
+        <form id="productForm" class="admin-form">
+          <input type="hidden" id="productEditId">
+          <label>Product Name</label>
+          <input type="text" id="productName" required>
+          <label>Category</label>
+          <select id="productCategory" required></select>
+          <label>Brand (optional)</label>
+          <select id="productBrand"><option value="">— None —</option></select>
+          <label>Price (₹) — optional</label>
+          <input type="number" id="productPrice" min="0">
+          <label>Description</label>
+          <textarea id="productDesc" rows="3"></textarea>
+          <label>Images (you can select multiple)</label>
+          <div class="edit-thumbs" id="productImagePreview"></div>
+          <input type="file" id="productImages" accept="image/*" multiple>
+          <label>Video (optional)</label>
+          <p id="productExistingVideoNote" class="hint-text hidden">A video is already attached.</p>
+          <input type="file" id="productVideo" accept="video/*">
+          <label class="stock-check"><input type="checkbox" id="productInStock" checked> In stock</label>
+          <p id="productUploadStatus" class="upload-status"></p>
+          <div class="form-btn-row">
+            <button type="submit" id="productSubmitBtn">Save Product</button>
+            <button type="button" id="productCancelEdit" class="secondary-btn hidden">Cancel Edit</button>
+          </div>
+        </form>
+        <h2 class="section-title">All Products</h2>
+        <div class="admin-product-filter-bar">
+          <input type="text" id="productSearchInput" class="admin-search-input" placeholder="Search products by name...">
+          <div class="category-chips admin-category-chips" id="productCategoryFilterChips">
+            <button class="chip active" data-cat="all">All Categories</button>
+          </div>
+        </div>
+        <div class="admin-list" id="productsList"></div>
+      </div>
+
+      <!-- Categories -->
+      <div class="tab-panel" id="tab-categories">
+        <h2 class="section-title">Add Category</h2>
+        <form id="categoryForm" class="admin-form">
+          <input type="hidden" id="categoryEditId">
+          <label>Category Name</label>
+          <input type="text" id="categoryName" required>
+          <button type="submit">Save Category</button>
+        </form>
+        <h2 class="section-title">All Categories</h2>
+        <div class="admin-list" id="categoriesList"></div>
+      </div>
+
+      <!-- Brands -->
+      <div class="tab-panel" id="tab-brands">
+        <h2 class="section-title">Add Brand</h2>
+        <form id="brandForm" class="admin-form">
+          <input type="hidden" id="brandEditId">
+          <label>Brand Name</label>
+          <input type="text" id="brandName" placeholder="e.g. Exide, Amaron" required>
+          <button type="submit">Save Brand</button>
+        </form>
+        <h2 class="section-title">All Brands</h2>
+        <p class="hint-text">Product add karte waqt aap in brands me se select kar sakte ho.</p>
+        <div class="admin-list" id="brandsList"></div>
+      </div>
+
+      <!-- Banner -->
+      <div class="tab-panel" id="tab-banner">
+        <h2 class="section-title">Homepage Banner Slider</h2>
+        <p class="hint-text">Images ya videos add karo. Videos autoplay honge, muted, loop me. User sound on/off kar sakta hai.</p>
+
+        <form id="bannerForm" class="admin-form">
+          <label>Type</label>
+          <select id="bannerType">
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+          </select>
+
+          <div id="bannerImageWrap">
+            <label>Image File (16:9 recommended)</label>
+            <input type="file" id="bannerImageInput" accept="image/*">
+          </div>
+
+          <div id="bannerVideoWrap" class="hidden">
+            <label>Video File (mp4/webm, small size recommended)</label>
+            <input type="file" id="bannerVideoInput" accept="video/*">
+          </div>
+
+          <p id="bannerUploadStatus" class="upload-status"></p>
+          <div class="form-btn-row">
+            <button type="submit">Add to Banner</button>
+          </div>
+        </form>
+
+        <h2 class="section-title">Current Banner Items</h2>
+        <p class="hint-text">Order change karne ke liye ↑↓ buttons use karo.</p>
+        <div class="admin-list" id="bannerList"></div>
+      </div>
+
+      <!-- Posters -->
+      <div class="tab-panel" id="tab-posters">
+        <h2 class="section-title">Posters Between Products</h2>
+        <p class="hint-text">Har 10 products ke baad ek poster apne aap dikhega. Poster 16:9 me hoga — multi-image slideshow ya ek video.</p>
+
+        <form id="posterForm" class="admin-form">
+          <input type="hidden" id="posterEditId">
+
+          <label>Poster Type</label>
+          <select id="posterType">
+            <option value="image">Image Slideshow (multiple images)</option>
+            <option value="video">Video</option>
+          </select>
+
+          <div id="posterImagesWrap">
+            <label>Images (upload multiple — they'll slide smoothly)</label>
+            <div class="edit-thumbs" id="posterImagePreview"></div>
+            <input type="file" id="posterImagesInput" accept="image/*" multiple>
+          </div>
+
+          <div id="posterVideoWrap" class="hidden">
+            <label>Video File</label>
+            <input type="file" id="posterVideoInput" accept="video/*">
+            <p class="hint-text" id="posterExistingVideoNote" style="margin-top:6px;"></p>
+          </div>
+
+          <label>Link URL (optional — click karne pe kahan jaaye)</label>
+          <input type="text" id="posterLinkUrl" placeholder="e.g. https://wa.me/91...">
+
+          <p id="posterUploadStatus" class="upload-status"></p>
+          <div class="form-btn-row">
+            <button type="submit" id="posterSubmitBtn">Save Poster</button>
+            <button type="button" id="posterCancelEdit" class="secondary-btn hidden">Cancel Edit</button>
+          </div>
+        </form>
+
+        <h2 class="section-title">All Posters</h2>
+        <div class="admin-list" id="postersList"></div>
+      </div>
+
+      <!-- Main Buttons -->
+      <div class="tab-panel" id="tab-mainbuttons">
+        <h2 class="section-title">Main Floating Buttons</h2>
+        <p class="hint-text">Teen floating buttons — bottom-right, bottom-left, top-right. Customer in buttons ko screen pe kahin bhi drag karke le ja sakta hai.</p>
+
+        <form id="mainButtonsForm" class="admin-form">
+          <div class="mb-slot">
+            <h3 class="about-subheading">Button 1 — Bottom-Right</h3>
+            <label class="stock-check"><input type="checkbox" id="mb1Enabled" checked> Show this button</label>
+            <label>Name (any length — auto-shrinks to fit)</label>
+            <input type="text" id="mb1Name" placeholder="e.g. Our Products">
+            <label>Icon (emoji — optional; if set, shows icon instead of name)</label>
+            <input type="text" id="mb1Icon" placeholder="Optional">
+            <label class="stock-check"><input type="checkbox" id="mb1AutoCats"> Auto-add all product categories to this button</label>
+          </div>
+          <div class="mb-slot">
+            <h3 class="about-subheading">Button 2 — Bottom-Left</h3>
+            <label class="stock-check"><input type="checkbox" id="mb2Enabled" checked> Show this button</label>
+            <label>Name (any length — auto-shrinks to fit)</label>
+            <input type="text" id="mb2Name" placeholder="e.g. Shop">
+            <label>Icon (emoji — optional)</label>
+            <input type="text" id="mb2Icon" placeholder="Optional">
+            <label class="stock-check"><input type="checkbox" id="mb2AutoCats"> Auto-add all product categories to this button</label>
+          </div>
+          <div class="mb-slot">
+            <h3 class="about-subheading">Button 3 — Top-Right</h3>
+            <label class="stock-check"><input type="checkbox" id="mb3Enabled" checked> Show this button</label>
+            <label>Name (any length — auto-shrinks to fit)</label>
+            <input type="text" id="mb3Name" placeholder="e.g. Menu">
+            <label>Icon (emoji — optional)</label>
+            <input type="text" id="mb3Icon" placeholder="Optional">
+            <label class="stock-check"><input type="checkbox" id="mb3AutoCats"> Auto-add all product categories to this button</label>
+          </div>
+          <div class="form-btn-row">
+            <button type="submit" id="mainButtonsSubmit">Save Main Buttons</button>
+          </div>
+          <p id="mainButtonsStatus" class="upload-status"></p>
+        </form>
+      </div>
+
+      <div class="tab-panel" id="tab-about">
+        <h2 class="section-title">About Us Page Content</h2>
+        <div class="page-editor" data-page="about"></div>
+      </div>
+      <div class="tab-panel" id="tab-privacy">
+        <h2 class="section-title">Privacy Policy Content</h2>
+        <div class="page-editor" data-page="privacy"></div>
+      </div>
+      <div class="tab-panel" id="tab-terms">
+        <h2 class="section-title">Terms &amp; Conditions Content</h2>
+        <div class="page-editor" data-page="terms"></div>
+      </div>
+      <div class="tab-panel" id="tab-developer">
+        <h2 class="section-title">Developer Page Content</h2>
+        <p class="hint-text">Ye page customer tab khulega jab wo footer me "Rahul Maurya" pe click karega.</p>
+        <div class="page-editor" data-page="developer"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-floating">
+        <h2 class="section-title">Floating Menu Buttons</h2>
+        <p class="hint-text">Har item ko ek main button (b1, b2, ya b3) se attach karo. Sub-button name optional hai.</p>
+        <form id="floatingMenuForm" class="admin-form">
+          <input type="hidden" id="floatingMenuEditId">
+          <label>Which main button does this belong to?</label>
+          <select id="floatingMenuButtonId" required>
+            <option value="b1">Button 1 — Bottom-Right</option>
+            <option value="b2">Button 2 — Bottom-Left</option>
+            <option value="b3">Button 3 — Top-Right</option>
+          </select>
+          <label>Quick Preset (optional)</label>
+          <select id="floatingMenuPreset">
+            <option value="">— Choose a preset —</option>
+            <option value="rateus">Rate Us ⭐</option>
+            <option value="wishlist">Wishlist ❤️</option>
+            <option value="whatsapp">WhatsApp 💬</option>
+            <option value="call">Call Us 📞</option>
+            <option value="location">Location 📍</option>
+            <option value="offer">Special Offer 🎁</option>
+            <option value="youtube">YouTube ▶️</option>
+            <option value="instagram">Instagram 📸</option>
+            <option value="facebook">Facebook 👍</option>
+            <option value="twitter">Twitter / X 🐦</option>
+            <option value="email">Email ✉️</option>
+            <option value="website">Website 🌐</option>
+            <option value="about">About Us ℹ️</option>
+            <option value="privacy">Privacy Policy 🔒</option>
+            <option value="terms">Terms &amp; Conditions 📄</option>
+          </select>
+          <label>Sub-Button Name (optional)</label>
+          <input type="text" id="floatingMenuLabel" placeholder="Optional — auto-shrinks if long">
+          <label>Emoji / Icon (any length)</label>
+          <input type="text" id="floatingMenuIcon" placeholder="Optional — auto-set from name if blank">
+          <label>Link / Action</label>
+          <input type="text" id="floatingMenuUrl" placeholder="https://wa.me/91...  OR  about.html  OR  action:wishlist  OR  action:cat:ID  OR  action:brand:ID" required>
+
+          <label>Quick Pick: Brand (auto-fills Link / Action)</label>
+          <select id="floatingMenuBrandPicker">
+            <option value="">— Choose a brand —</option>
+          </select>
+
+          <div class="form-btn-row">
+            <button type="submit" id="floatingMenuSubmitBtn">Save Button</button>
+            <button type="button" id="floatingMenuCancelEdit" class="secondary-btn hidden">Cancel Edit</button>
+          </div>
+        </form>
+        <h2 class="section-title">All Floating Buttons</h2>
+        <div class="admin-list" id="floatingMenuList"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-entryvideo">
+        <h2 class="section-title">Admin Entry Video</h2>
+        <form id="entryVideoForm" class="admin-form">
+          <label>New Entry Video</label>
+          <input type="file" id="entryVideoInput" accept="video/*">
+          <p id="entryVideoUploadStatus" class="upload-status"></p>
+          <div class="form-btn-row">
+            <button type="submit">Save Video</button>
+            <button type="button" id="entryVideoRemoveBtn" class="secondary-btn">Remove Video</button>
+          </div>
+        </form>
+        <p id="currentEntryVideoLabel" class="hint-text"></p>
+      </div>
+
+      <div class="tab-panel" id="tab-blocked">
+        <h2 class="section-title">Blocked Login Attempts</h2>
+        <div class="alert-opt-in">
+          <button type="button" id="enablePhoneAlerts" class="secondary-btn">🔔 Enable Live Alerts on This Device</button>
+          <p class="hint-text" id="phoneAlertsStatus"></p>
+        </div>
+        <div class="admin-list" id="blockedList"></div>
+        <h2 class="section-title" style="margin-top:28px;">Blocked Devices</h2>
+        <div class="admin-list" id="blockedDevicesList"></div>
+        <h2 class="section-title" style="margin-top:28px;">Trusted Devices</h2>
+        <div class="admin-list" id="trustedDevicesList"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-security">
+        <h2 class="section-title">Security Alert Sound</h2>
+        <form id="sirenForm" class="admin-form">
+          <label>New Siren/Alert Sound (mp3)</label>
+          <input type="file" id="sirenInput" accept="audio/*">
+          <p id="sirenUploadStatus" class="upload-status"></p>
+          <div class="form-btn-row">
+            <button type="submit">Save Sound</button>
+            <button type="button" id="sirenTestBtn" class="secondary-btn">Test</button>
+            <button type="button" id="sirenResetBtn" class="secondary-btn">Reset to Default</button>
+          </div>
+        </form>
+        <p id="currentSirenLabel" class="hint-text"></p>
+      </div>
+
+      <div class="tab-panel" id="tab-settings">
+        <h2 class="section-title">Shop Details</h2>
+        <form id="settingsForm" class="admin-form">
+          <label>Shop Name</label>
+          <input type="text" id="settingShopName">
+          <label>Tagline</label>
+          <input type="text" id="settingTagline">
+          <label>Address</label>
+          <textarea id="settingAddress" rows="2"></textarea>
+          <label>Call Number</label>
+          <input type="text" id="settingPhone" placeholder="+91XXXXXXXXXX">
+          <label>WhatsApp Number</label>
+          <input type="text" id="settingWhatsapp" placeholder="+91XXXXXXXXXX">
+          <label>Hero Eyebrow</label>
+          <input type="text" id="settingHeroEyebrow">
+          <label>Hero Headline</label>
+          <input type="text" id="settingHeroHeadline">
+          <label>Hero Description</label>
+          <textarea id="settingHeroDescription" rows="2"></textarea>
+          <label>Footer Tagline</label>
+          <input type="text" id="settingFooterTagline">
+          <button type="submit">Save Settings</button>
+          <p id="settingsStatus" class="upload-status"></p>
+        </form>
+      </div>
+
+      <!-- Eclipse Control -->
+      <div class="tab-panel" id="tab-eclipse">
+        <h2 class="section-title">Eclipse Control</h2>
+        <p class="hint-text">Real eclipses auto-detect honge (astronomy-engine se). Yahan se manual eclipse force kar sakte ho — sab users ko 5 min ke liye dikhega.</p>
+
+        <div class="admin-form">
+          <h3 class="about-subheading">Live Status</h3>
+          <p id="eclipseStatusText" class="hint-text">Status: —</p>
+          <p id="eclipseRealText" class="hint-text">Real eclipse today: —</p>
+
+          <h3 class="about-subheading">Force Eclipse (Show Off Mode)</h3>
+          <label class="stock-check">
+            <input type="checkbox" id="eclipseForceActive">
+            🚀 Show eclipse to ALL users RIGHT NOW
+          </label>
+
+          <label>Eclipse Type (when force is ON)</label>
+          <select id="eclipseForceType">
+            <option value="auto">Auto Detect (real eclipse se)</option>
+            <option value="solar">☀️ Solar Eclipse</option>
+            <option value="lunar">🌒 Lunar Eclipse</option>
+          </select>
+
+          <label class="stock-check">
+            <input type="checkbox" id="eclipseBlockReal">
+            ⛔ Also block real eclipses (full off mode)
+          </label>
+
+          <div class="form-btn-row">
+            <button type="button" id="eclipseSaveBtn">Save Settings</button>
+            <button type="button" id="eclipseHardStopBtn" class="secondary-btn">⛔ HARD STOP Everything</button>
+          </div>
+
+          <p id="eclipseSaveStatus" class="upload-status"></p>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-social">
+        <h2 class="section-title">Social & Contact Links</h2>
+        <form id="socialLinkForm" class="admin-form">
+          <input type="hidden" id="socialLinkEditId">
+          <label>Platform</label>
+          <select id="socialLinkPlatform">
+            <option value="youtube">YouTube</option>
+            <option value="instagram">Instagram</option>
+            <option value="facebook">Facebook</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="maps">Google Maps</option>
+            <option value="twitter">Twitter / X</option>
+            <option value="website">Other / Website</option>
+          </select>
+          <label>Label</label>
+          <input type="text" id="socialLinkLabel">
+          <label>Link URL</label>
+          <input type="text" id="socialLinkUrl" placeholder="https://...">
+          <button type="submit">Save Link</button>
+        </form>
+        <h2 class="section-title">All Links</h2>
+        <div class="admin-list" id="socialLinksList"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-reviews">
+        <h2 class="section-title">Customer Reviews</h2>
+        <p class="hint-text" id="reviewsTotalCount">Total feedback received: 0</p>
+        <div class="admin-list" id="reviewsAdminList"></div>
+        <h2 class="section-title" style="margin-top:28px;">Blocked Reviewers</h2>
+        <div class="admin-list" id="blockedReviewersList"></div>
+        <h2 class="section-title" style="margin-top:28px;">Bad Words List</h2>
+        <div class="form-btn-row">
+          <button type="button" id="toggleWordsVisible" class="secondary-btn">👁 Show Real Words</button>
+        </div>
+        <form id="badWordForm" class="admin-form">
+          <label>Add a word</label>
+          <input type="text" id="badWordInput">
+          <button type="submit">Add Word</button>
+        </form>
+        <form id="badWordBulkForm" class="admin-form">
+          <label>Add many words at once</label>
+          <textarea id="badWordBulkInput" rows="4"></textarea>
+          <button type="submit">Add All</button>
+        </form>
+        <p class="hint-text" id="badWordStatus"></p>
+        <div class="admin-list" id="badWordsList"></div>
+        <h2 class="section-title" style="margin-top:28px;">Feedback Settings</h2>
+        <form id="feedbackSettingsForm" class="admin-form">
+          <label>"Thank You" Message</label>
+          <textarea id="feedbackThankYouText" rows="2">Thank you for your feedback!</textarea>
+          <label>Animation Duration (seconds)</label>
+          <input type="number" id="feedbackAnimDuration" min="2" max="15" value="5">
+          <button type="submit">Save Settings</button>
+          <p id="feedbackSettingsStatus" class="upload-status"></p>
+        </form>
+        <div class="form-btn-row" style="margin-top:10px;">
+          <div style="flex:1;">
+            <label>Celebration Sound</label>
+            <input type="file" id="celebrationSoundInput" accept="audio/*">
+            <button type="button" id="celebrationSoundSaveBtn" class="secondary-btn">Save Sound</button>
+            <button type="button" id="celebrationSoundTestBtn" class="secondary-btn">Test</button>
+            <p id="celebrationSoundStatus" class="hint-text"></p>
+          </div>
+        </div>
+        <div class="form-btn-row" style="margin-top:10px;">
+          <div style="flex:1;">
+            <label>Blocked-Feedback Siren</label>
+            <input type="file" id="abuseSoundInput" accept="audio/*">
+            <button type="button" id="abuseSoundSaveBtn" class="secondary-btn">Save Sound</button>
+            <button type="button" id="abuseSoundTestBtn" class="secondary-btn">Test</button>
+            <p id="abuseSoundStatus" class="hint-text"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Master Control -->
+      <div class="tab-panel" id="tab-mastercontrol">
+        <h2 class="section-title">🚨 Master Control — Visitor Tracking</h2>
+        <p class="hint-text">Har visitor ka data automatically save hota hai. Block karne ke liye visitor pe click karo. Sirf last 10 visits load honge (Firebase limit bachane ke liye).</p>
+
+        <div class="mc-filters">
+          <button type="button" class="mc-filter-btn active" data-filter="all">All</button>
+          <button type="button" class="mc-filter-btn" data-filter="today">Today</button>
+          <button type="button" class="mc-filter-btn" data-filter="week">This Week</button>
+          <button type="button" class="mc-filter-btn" data-filter="blocked">Blocked</button>
+        </div>
+
+        <div class="mc-list-head">
+          <span class="mc-col-time">Time</span>
+          <span class="mc-col-loc">Location / IP</span>
+          <span class="mc-col-device">Device</span>
+          <span class="mc-col-action">Action</span>
+        </div>
+
+        <div id="mcVisitsList" class="mc-visits-list">
+          <p class="empty-msg">Loading...</p>
+        </div>
+
+        <div class="form-btn-row" id="mcMoreWrap" style="margin-top:14px; display:none; justify-content:center;">
+          <button type="button" id="mcMoreBtn" class="secondary-btn">⬇ Load 10 More Visits</button>
+        </div>
+
+        <p id="mcStatusText" class="hint-text" style="text-align:center; margin-top:10px;"></p>
+
+        <details class="mc-password-box">
+          <summary>
+            <span>🔐 Change Delete Password</span>
+          </summary>
+          <form id="mcPasswordForm" class="admin-form" style="margin-top:14px;">
+            <label>Current Password</label>
+            <input type="password" id="mcCurPwd" placeholder="Enter current password (leave blank if first time)">
+
+            <label>New Password</label>
+            <input type="password" id="mcNewPwd" placeholder="Enter new password (min 8 chars)" required>
+
+            <label>Confirm New Password</label>
+            <input type="password" id="mcConfirmPwd" placeholder="Re-enter new password" required>
+
+            <div class="form-btn-row">
+              <button type="submit" id="mcPwdSaveBtn">💾 Save New Password</button>
+            </div>
+            <p id="mcPwdStatus" class="upload-status"></p>
+          </form>
+          <p class="hint-text" style="margin-top:8px;">
+            Ye password sirf "Delete Visitor Data" ke liye hai. Firestore me SHA-256 hash ke roop me safe rehta hai.
+          </p>
+        </details>
+      </div>
+
+    </main>
+  </section>
+
+  <div class="security-alert hidden" id="securityAlert">
+    <div class="skull">💀</div>
+    <h2 class="alert-title">⚠ SECURITY ALERT ⚠</h2>
+    <p class="alert-sub">UNAUTHORIZED ACCESS BLOCKED</p>
+    <p class="alert-sub2">This login ID has been permanently blocked.</p>
+  </div>
+
+  <div class="security-alert owner-alert hidden" id="ownerAlertOverlay">
+    <div class="skull">🚨</div>
+    <h2 class="alert-title">NEW LOGIN ATTEMPT BLOCKED</h2>
+    <p class="alert-sub" id="ownerAlertId"></p>
+    <p class="alert-sub2" id="ownerAlertTime"></p>
+    <button type="button" id="ownerAlertDismiss" class="alert-dismiss-btn">Dismiss</button>
+  </div>
+
+  <!-- Master Control - Visitor Detail Modal -->
+  <div id="mcDetailModal" class="mc-modal-overlay hidden">
+    <div class="mc-modal">
+      <div class="mc-modal-head">
+        <h3 id="mcDetailTitle">Visitor Detail</h3>
+        <button type="button" id="mcDetailClose" class="mc-modal-close">✕</button>
+      </div>
+      <div class="mc-modal-body" id="mcDetailBody">
+        <p class="hint-text">Loading...</p>
+      </div>
+      <div class="mc-modal-actions">
+        <button type="button" id="mcBlockBtn" class="mc-block-btn">🚫 Block This Visitor</button>
+        <button type="button" id="mcDeleteBtn" class="mc-delete-btn">🗑 Delete Data</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dev-credit">© 2026 Maurya Battery Works. All Rights Reserved. | Designed &amp; Developed by <span class="credit-name">Rahul Maurya</span></footer>
+  <div class="shine-bar shine-bar-bottom"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2/astronomy.browser.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="shared.js"></script>
+  <script src="icons.js"></script>
+  <script src="fingerprint.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="admin.js"></script>
+</body>
+            </html>

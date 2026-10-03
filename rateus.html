@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate Us — Maurya Battery Works, Marihan, Mirzapur</title>
+<meta name="description" content="Share your experience with Maurya Battery Works — Authorised Exide Battery dealer in Marihan, Mirzapur.">
+<meta name="keywords" content="Rate Maurya Battery Works, review Exide dealer Mirzapur, customer feedback">
+<meta name="author" content="Rahul Maurya — Professional AI-Powered Web Developer and Designer">
+<meta name="designer" content="Rahul Maurya — Professional AI-Powered Web Developer and Designer">
+<meta name="developer" content="Rahul Maurya">
+<meta name="creator" content="Rahul Maurya">
+<meta name="publisher" content="Maurya Battery Works">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maurya-battery-works.pages.dev/rateus">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maurya-battery-works.pages.dev/rateus.html">
+<meta property="og:site_name" content="Maurya Battery Works">
+<meta property="og:title" content="Rate Us — Maurya Battery Works">
+<meta property="og:description" content="Share your experience with Maurya Battery Works, Marihan, Mirzapur.">
+<meta property="og:image" content="https://maurya-battery-works.pages.dev/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:author" content="Rahul Maurya">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rate Us — Maurya Battery Works">
+<meta name="twitter:description" content="Share your experience with Maurya Battery Works.">
+<meta name="twitter:image" content="https://maurya-battery-works.pages.dev/og-image.jpg">
+<meta name="twitter:creator" content="@rahulmaurya">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Rate Us",
+  "url": "https://maurya-battery-works.pages.dev/rateus.html",
+  "description": "Share your experience with Maurya Battery Works — Authorised Exide Battery dealer in Marihan, Mirzapur.",
+  "author": {
+    "@type": "Person",
+    "name": "Rahul Maurya",
+    "jobTitle": "Professional AI-Powered Web Developer and Designer",
+    "url": "https://maurya-battery-works.pages.dev/developer.html"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Rahul Maurya",
+    "jobTitle": "Professional AI-Powered Web Developer and Designer"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Maurya Battery Works",
+    "url": "https://maurya-battery-works.pages.dev/"
+  },
+  "mainEntity": {
+    "@type": "LocalBusiness",
+    "name": "Maurya Battery Works",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Marihan",
+      "addressLocality": "Mirzapur",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "231210",
+      "addressCountry": "IN"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "100"
+    }
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://maurya-battery-works.pages.dev/" },
+    { "@type": "ListItem", "position": 2, "name": "Rate Us", "item": "https://maurya-battery-works.pages.dev/rateus.html" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700;1,900&family=Poppins:ital,wght@0,400;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="shine-bar shine-bar-top"></div>
+
+  <header class="shop-banner">
+    <div class="banner-glow"></div>
+    <h1>Rate Your Experience</h1>
+    <p class="tagline">Maurya Battery Works — tell other customers what you think</p>
+  </header>
+
+  <main>
+    <section class="rateus-section">
+      <a href="index.html" class="rateus-back">← Back to Shop</a>
+      <p class="hint-text rateus-total" id="rateusTotalCount">Total feedback received: 0</p>
+
+      <div class="rateus-notice hidden" id="rateusNotice"></div>
+
+      <form id="rateusForm" class="admin-form rateus-form hidden">
+        <label>Your Rating</label>
+        <div class="star-picker" id="starPicker">
+          <span data-star="1">★</span><span data-star="2">★</span><span data-star="3">★</span><span data-star="4">★</span><span data-star="5">★</span>
+        </div>
+        <label>Your Name</label>
+        <input type="text" id="rateusName" placeholder="Enter your name" required>
+        <label>Your Address</label>
+        <textarea id="rateusAddress" rows="2" placeholder="Enter your address (kept private, never shown publicly)" required></textarea>
+        <label>Tell us about your experience (optional)</label>
+        <textarea id="rateusDescription" rows="3" placeholder="What did you like? Anything we can improve?"></textarea>
+        <button type="submit">Submit Feedback</button>
+        <p class="upload-status" id="rateusFormStatus"></p>
+      </form>
+    </section>
+
+    <section class="rateus-list-section">
+      <h2 class="section-title">What Customers Say</h2>
+      <div id="rateusList"></div>
+      <div class="form-btn-row" id="rateusMoreWrap">
+        <button type="button" id="rateusMoreBtn" class="secondary-btn hidden">See more customer visits</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <h3 id="footerShopName">Maurya Battery Works</h3>
+    <p class="footer-tagline" id="footerTagline">Trusted power, close to home.</p>
+    <p class="footer-seo-line">Maurya Battery Works — Authorised Exide Battery dealer in Marihan, Mirzapur, Uttar Pradesh.</p>
+    <p class="footer-address" id="footerAddressLine">Marihan, Mirzapur, Uttar Pradesh - 231210</p>
+    <div class="social-links" id="socialLinks"></div>
+    <p class="footer-links">
+      <a href="about.html">About Us</a><span>·</span>
+      <a href="features.html">Features</a><span>·</span>
+      <a href="privacy.html">Privacy Policy</a><span>·</span>
+      <a href="terms.html">Terms &amp; Conditions</a><span>·</span>
+      <a href="rateus.html">Rate Us</a>
+    </p>
+    <p class="copyright" id="copyrightLine">© 2026 Maurya Battery Works. All Rights Reserved. | Designed &amp; Developed by <a href="developer.html" class="credit-name shimmer-name">Rahul Maurya</a></p>
+  </footer>
+
+  <div class="shine-bar shine-bar-bottom"></div>
+
+  <button type="button" id="fmMainBtn1" class="fm-main-btn fm-btn-pos-br" aria-label="Open quick menu"><span class="fm-main-label">MBW</span></button>
+  <button type="button" id="fmMainBtn2" class="fm-main-btn fm-btn-pos-bl" aria-label="Open quick menu"><span class="fm-main-label">Shop</span></button>
+  <button type="button" id="fmMainBtn3" class="fm-main-btn fm-btn-pos-tr" aria-label="Open quick menu"><span class="fm-main-label">Menu</span></button>
+
+  <div id="fmOverlay" class="fm-overlay">
+    <div class="fm-overlay-center">
+      <div class="fm-orbit-container">
+        <button type="button" class="fm-center-hub" id="fmCenterHub" aria-label="Close menu">
+          <span class="fm-hub-brand">MBW</span>
+          <span class="fm-hub-hint">✕ Close</span>
+        </button>
+        <div class="fm-orbit-ring" id="fmOrbitRing"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="security-alert hidden" id="rateusAbuseAlert">
+    <div class="skull">💀</div>
+    <h2 class="alert-title">⚠ SECURITY ALERT ⚠</h2>
+    <p class="alert-sub">THIS FEEDBACK COULD NOT BE POSTED</p>
+    <p class="alert-sub2">Abusive content is not allowed on this site.</p>
+  </div>
+
+  <div class="rateus-celebrate hidden" id="rateusCelebrate">
+    <div class="rateus-fall-wrap" id="rateusFallWrap"></div>
+    <div class="rateus-celebrate-card">
+      <p id="rateusThankYouText">Thank you for your feedback!</p>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="shared.js"></script>
+  <script src="icons.js"></script>
+  <script src="eclipse.js"></script>
+  <script src="fingerprint.js"></script>
+  <script src="tracker.js"></script>
+  <script src="rateus.js"></script>
+  <script src="daynight.js"></script>
+  <script src="floating-menu.js"></script>
+  <script src="sparks.js"></script>
+  <script src="loadcalculator.js"></script>
+
+  <script>
+    renderFooterFromFirestore();
+    renderSocialLinksFromFirestore();
+
+    console.log("%c💻 Crafted with code by Rahul Maurya ⚡", "color:#ffcc00; font-size:14px; font-weight:bold;");
+    console.log("%c© 2026 Maurya Battery Works — Rate Us | Designed & Developed by Rahul Maurya", "color:#f5c451; font-size:11px;");
+  </script>
+</body>
+</html>

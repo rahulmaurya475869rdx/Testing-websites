@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+# AI crawlers allowed
+User-agent: GPTBot
+Allow: /
+Disallow: /admin.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin.html
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://maurya-battery-works.pages.dev/sitemap.xml
