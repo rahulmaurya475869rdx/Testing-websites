@@ -22,7 +22,7 @@
       <p class="login-sub">Authorized access only.</p>
       <div id="loginForm">
         <label for="adminId">Admin ID</label>
-        <input type="text" id="adminId" placeholder="Enter your admin email" required autocomplete="off" spellcheck="false">
+        <input type="text" id="adminId" placeholder="Enter your admin email" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
         <label for="adminPass">Secret Password</label>
         <input type="password" id="adminPass" placeholder="••••••••" required autocomplete="new-password">
         <button type="button" id="loginSubmitBtn">Login</button>
@@ -328,6 +328,7 @@
         <h2 class="section-title">Customer Reviews</h2>
         <p class="hint-text" id="reviewsTotalCount">Total feedback received: 0</p>
         <div class="admin-list" id="reviewsAdminList"></div>
+
         <h2 class="section-title" style="margin-top:28px;">Bad Words List</h2>
         <div class="form-btn-row">
           <button type="button" id="toggleWordsVisible" class="secondary-btn">👁 Show Real Words</button>
