@@ -1,5 +1,5 @@
 /* =========================================================
-   Shree Shiv Alankar Mandir — Shared Helpers
+   Sree Shiv Alankar Mandir — Shared Helpers
    ========================================================= */
 
 /* ---------- HTML escape ---------- */
@@ -13,7 +13,6 @@ var escapeHtml = escHtml;
 var escapeHtmlA = escHtml;
 
 /* ---------- Simple device ID (localStorage based) ---------- */
-/* Replaces the old canvas+WebGL fingerprint system. */
 function getSimpleDeviceId() {
   try {
     let id = localStorage.getItem("ssam_device_id");
@@ -78,13 +77,19 @@ function renderFooterFromFirestore() {
   if (typeof db === "undefined") return;
   db.collection("settings").doc("general").get().then(function (doc) {
     var d = doc.exists ? doc.data() : {};
-    var shopName = d.shopName || "Shree Shiv Alankar Mandir";
-    var address = d.address || "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh - 231210";
+    var shopName = d.shopName || "Sree Shiv Alankar Mandir";
+    var address = d.address || "Robertsganj Road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh - 231210";
 
     var fName = document.getElementById("footerShopName");
     if (fName) fName.textContent = shopName;
     var fTag = document.getElementById("footerTagline");
     if (fTag) fTag.textContent = d.footerTagline || "Timeless jewellery, trusted since generations.";
+
+    // SEO line — NO address (avoid duplication)
+    var fSeo = document.getElementById("footerSeoLine");
+    if (fSeo) fSeo.textContent = "Sree Shiv Alankar Mandir — Hallmark Certified Gold, Silver & Diamond Jewellery";
+
+    // Address line — ONLY place where full address shows
     var fAddr = document.getElementById("footerAddressLine");
     if (fAddr) fAddr.textContent = address;
     var cAddr = document.getElementById("contactAddress");
