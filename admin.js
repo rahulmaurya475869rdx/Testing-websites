@@ -888,7 +888,7 @@ function initSettings() {
     const d = doc.exists ? doc.data() : {};
     document.getElementById("settingShopName").value = d.shopName || "Shree Shiv Alankar Mandir";
     document.getElementById("settingTagline").value = d.tagline || "";
-    document.getElementById("settingAddress").value = d.address || "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur";
+    document.getElementById("settingAddress").value = d.address || "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh - 231210";
     document.getElementById("settingPhone").value = d.phone || "";
     document.getElementById("settingWhatsapp").value = d.whatsapp || "";
     document.getElementById("settingHeroEyebrow").value = d.heroEyebrow || "";
