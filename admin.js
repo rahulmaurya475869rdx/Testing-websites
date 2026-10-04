@@ -56,7 +56,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 /* =========================================================
    CLOUDINARY UPLOAD (via Cloudflare Worker)
    ========================================================= */
-const CLOUDINARY_SIGN_WORKER = "https://PASTE_FRIEND_WORKER_URL.workers.dev";
+const CLOUDINARY_SIGN_WORKER = "https://gaurav-cloudinary-setup.rahulmaurya475869.workers.dev";
 
 async function uploadToCloudinary(file, resourceType) {
   const user = firebase.auth().currentUser;
