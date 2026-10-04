@@ -1,5 +1,5 @@
 /* =========================================================
-   Shree Shiv Alankar Mandir — shared stylesheet
+   Sree Shiv Alankar Mandir — shared stylesheet
    Premium jewellery edition (readable, bright, elegant)
    ========================================================= */
 
@@ -59,7 +59,7 @@ button, input, select, textarea{ font-family:var(--font-body); }
   position:relative;
   overflow:hidden;
   margin-top:7px;
-  padding:clamp(20px, 4vw, 32px) clamp(18px, 4vw, 34px);
+  padding:clamp(22px, 4.5vw, 36px) clamp(18px, 4vw, 34px);
   text-align:left;
   background:linear-gradient(135deg, #5a0a12 0%, #7a1020 50%, #4a0a12 100%);
   border-bottom:2px solid rgba(240, 200, 80, .75);
@@ -81,7 +81,7 @@ button, input, select, textarea{ font-family:var(--font-body); }
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 900;
-  font-size: clamp(1.6rem, 6.5vw, 2.5rem);
+  font-size: clamp(1.9rem, 7.5vw, 3rem);
   line-height: 1.15;
   margin: 0;
   letter-spacing: .8px;
@@ -90,15 +90,36 @@ button, input, select, textarea{ font-family:var(--font-body); }
   color: #f0c850;
   text-shadow:
     0 2px 3px rgba(0, 0, 0, .85),
-    0 0 20px rgba(240, 200, 80, .55),
-    0 0 40px rgba(240, 200, 80, .3);
+    0 0 22px rgba(240, 200, 80, .6),
+    0 0 44px rgba(240, 200, 80, .35);
+}
+
+.shop-name-h1{
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(1.9rem, 7.5vw, 3rem);
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  letter-spacing: .8px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: #f0c850;
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, .85),
+    0 0 22px rgba(240, 200, 80, .6),
+    0 0 44px rgba(240, 200, 80, .35);
 }
 
 .shop-banner .tagline{
   position: relative;
   z-index: 1;
   margin: 8px 0 0;
-  font-size: clamp(.82rem, 2.6vw, .95rem);
+  font-size: clamp(.85rem, 2.7vw, 1rem);
   line-height: 1.5;
   padding: 0;
   letter-spacing: .3px;
@@ -447,7 +468,7 @@ button, input, select, textarea{ font-family:var(--font-body); }
   word-wrap:break-word;
 }
 .site-footer .footer-tagline{ color:var(--white); opacity:.95; margin:0 0 10px; font-size:clamp(.85rem, 2.7vw, 1rem); font-weight:500; }
-.site-footer .footer-seo-line{ color:var(--white); opacity:.85; font-size:clamp(.75rem, 2.4vw, .85rem); margin:0 0 10px; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.6; }
+.site-footer .footer-seo-line{ color:var(--gold); opacity:.9; font-size:clamp(.78rem, 2.5vw, .88rem); margin:0 0 12px; max-width:600px; margin-left:auto; margin-right:auto; line-height:1.6; font-style:italic; }
 .site-footer .footer-address{ color:var(--white); opacity:.9; font-size:clamp(.8rem, 2.5vw, .9rem); margin:0 0 20px; }
 .social-links{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-bottom:22px; }
 .social-links a{ display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--white); text-decoration:none; transition:transform .15s ease; }
@@ -881,8 +902,8 @@ body.detail-open .fm-main-btn{ opacity:0; pointer-events:none; transform:scale(0
 }
 @media (max-width:360px){
   .product-grid{ grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
-  .shop-banner h1{ font-size:1.35rem; }
-  .shop-banner .tagline{ font-size:.75rem; }
+  .shop-banner h1, .shop-name-h1{ font-size:1.5rem; }
+  .shop-banner .tagline{ font-size:.78rem; }
 }
 
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
@@ -1497,4 +1518,4 @@ body.detail-open{ background:var(--black); }
   .about-more summary{ padding:11px 14px; font-size:.88rem; }
   .about-more-body{ padding:0 14px 14px; }
   .about-more-body ul{ grid-template-columns:1fr; }
-                }
+   }
