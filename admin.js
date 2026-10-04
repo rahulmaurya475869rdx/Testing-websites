@@ -148,17 +148,17 @@ const PAGE_STARTERS = {
   about: [
     { type: "text", title: "About Shree Shiv Alankar Mandir", text: "Shree Shiv Alankar Mandir is a trusted jewellery shop located in Marihan, Mirzapur, Uttar Pradesh. We offer a wide range of gold, silver and diamond jewellery with hallmark certification." },
     { type: "list", title: "What We Offer", items: ["Gold Jewellery (22K, 18K Hallmark)","Silver Jewellery","Diamond Collection","Bridal Sets","Temple Jewellery","Custom Design Orders"] },
-    { type: "text", title: "Visit Our Shop", text: "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur. Open daily 10:00 AM – 8:00 PM." }
+    { type: "text", title: "Visit Our Shop", text: "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh - 231210. Open daily 10:00 AM – 6:00 PM." }
   ],
   privacy: [
     { type: "text", title: "Introduction", text: "This Privacy Policy explains how Shree Shiv Alankar Mandir collects, uses, stores and protects information when you use our website." },
     { type: "list", title: "Information We Collect", items: ["Your name and address when you submit a review","Your star rating and feedback message","Basic device information for security"] },
-    { type: "text", title: "Contact Us", text: "Shree Shiv Alankar Mandir, Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur." }
+    { type: "text", title: "Contact Us", text: "Shree Shiv Alankar Mandir, Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh - 231210." }
   ],
   terms: [
-    { type: "text", title: "About Us", text: "Shree Shiv Alankar Mandir is a jewellery shop located at Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur." },
+    { type: "text", title: "About Us", text: "Shree Shiv Alankar Mandir is a jewellery shop located at Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh - 231210." },
     { type: "list", title: "Products & Pricing", items: ["All products are genuine and hallmark certified","Prices are for reference only","Product images are for illustration","Stock availability changes"] },
-    { type: "text", title: "Contact", text: "Shree Shiv Alankar Mandir, Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur." }
+    { type: "text", title: "Contact", text: "Shree Shiv Alankar Mandir, Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar pradesh - 231210." }
   ],
   developer: [
     { type: "text", title: "Rahul Maurya", text: "Designer & Developer of Shree Shiv Alankar Mandir website." },
