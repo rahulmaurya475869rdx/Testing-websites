@@ -101,6 +101,7 @@ function initDashboard() {
   initSettings();
   initSocialLinks();
   initCustomerReviews();
+  initRateCalculator();
 }
 
 /* =========================================================
@@ -1163,3 +1164,88 @@ function initCustomerReviews() {
     if (url) { playAudioFromUrl(url); setTimeout(stopTestAudio, 3000); }
   });
                               }
+
+/* =========================================================
+   RATE CALCULATOR — Admin settings
+   ========================================================= */
+function initRateCalculator() {
+  const form = document.getElementById("rateCalcForm");
+  if (!form) return;
+
+  const fields = {
+    enabled: document.getElementById("rcEnabled"),
+    gold24k: document.getElementById("rcGold24"),
+    gold22k: document.getElementById("rcGold22"),
+    gold18k: document.getElementById("rcGold18"),
+    gold14k: document.getElementById("rcGold14"),
+    silver999: document.getElementById("rcSilver999"),
+    silver925: document.getElementById("rcSilver925"),
+    makingPercent: document.getElementById("rcMakingPercent"),
+    gst: document.getElementById("rcGst"),
+    hallmarkPerPiece: document.getElementById("rcHallmark")
+  };
+
+  const statusEl = document.getElementById("rcSaveStatus");
+
+  /* ---------- Load existing settings ---------- */
+  function loadSettings() {
+    db.collection("settings").doc("rateCalculator").get().then((doc) => {
+      const d = doc.exists ? doc.data() : {};
+      fields.enabled.checked = d.enabled !== false;
+      fields.gold24k.value = d.gold24k || "";
+      fields.gold22k.value = d.gold22k || "";
+      fields.gold18k.value = d.gold18k || "";
+      fields.gold14k.value = d.gold14k || "";
+      fields.silver999.value = d.silver999 || "";
+      fields.silver925.value = d.silver925 || "";
+      fields.makingPercent.value = d.makingPercent || "";
+      fields.gst.value = d.gst != null ? d.gst : "";
+      fields.hallmarkPerPiece.value = d.hallmarkPerPiece || "";
+    }).catch(() => {});
+  }
+
+  /* ---------- Save settings ---------- */
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    statusEl.textContent = "Saving...";
+    statusEl.style.color = "";
+
+    const data = {
+      enabled: fields.enabled.checked,
+      gold24k: Number(fields.gold24k.value) || 0,
+      gold22k: Number(fields.gold22k.value) || 0,
+      gold18k: Number(fields.gold18k.value) || 0,
+      gold14k: Number(fields.gold14k.value) || 0,
+      silver999: Number(fields.silver999.value) || 0,
+      silver925: Number(fields.silver925.value) || 0,
+      makingPercent: Number(fields.makingPercent.value) || 0,
+      gst: fields.gst.value === "" ? 3 : Number(fields.gst.value),
+      hallmarkPerPiece: Number(fields.hallmarkPerPiece.value) || 0,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+      await db.collection("settings").doc("rateCalculator").set(data, { merge: true });
+      statusEl.textContent = "✅ Saved! Customers will see updated rates instantly.";
+      statusEl.style.color = "#6ee88a";
+      setTimeout(() => { statusEl.textContent = ""; statusEl.style.color = ""; }, 4000);
+    } catch (err) {
+      statusEl.textContent = "❌ Error: " + err.message;
+      statusEl.style.color = "#ff9090";
+    }
+  });
+
+  /* ---------- Reload button ---------- */
+  const reloadBtn = document.getElementById("rcReloadBtn");
+  if (reloadBtn) {
+    reloadBtn.addEventListener("click", () => {
+      loadSettings();
+      statusEl.textContent = "Reloaded from Firestore.";
+      statusEl.style.color = "";
+      setTimeout(() => { statusEl.textContent = ""; }, 2500);
+    });
+  }
+
+  /* ---------- Initial load ---------- */
+  loadSettings();
+}
