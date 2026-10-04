@@ -451,7 +451,7 @@ function buildPosterHtml(poster, posterIndex) {
     const dotsHtml = '<div class="poster-dots" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;align-items:center;z-index:4;padding:5px 10px;background:rgba(0,0,0,.45);border-radius:999px;">' +
       validImages.map(function(_, i) {
         return '<span class="poster-dot' + (i === 0 ? ' active' : '') + '" data-i="' + i + '" ' +
-               'style="width:' + (i === 0 ? '18px' : '6px') + ';height:6px;border-radius:50%;background:' + (i === 0 ? '#f5c451' : 'rgba(255,255,255,.45)') + ';cursor:pointer;transition:all .25s ease;"></span>';
+               'style="width:' + (i === 0 ? '18px' : '6px') + ';height:6px;border-radius:50%;background:' + (i === 0 ? '#f0c850' : 'rgba(255,255,255,.45)') + ';cursor:pointer;transition:all .25s ease;"></span>';
       }).join("") +
       '</div>';
 
@@ -461,7 +461,7 @@ function buildPosterHtml(poster, posterIndex) {
   const linkOpen = poster.linkUrl ? '<a href="' + poster.linkUrl + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:absolute;inset:0;z-index:2;"></a>' : "";
 
   return '<div class="poster-card" data-poster-idx="' + posterIndex + '" ' +
-    'style="grid-column:1 / -1;position:relative;width:100%;aspect-ratio:16 / 9;border-radius:14px;overflow:hidden;border:2px solid #f5c451;box-shadow:0 0 26px rgba(245,196,81,.35), 0 10px 30px rgba(0,0,0,.55);background:#0a0a0a;margin:8px 0;">' +
+    'style="grid-column:1 / -1;position:relative;width:100%;aspect-ratio:16 / 9;border-radius:14px;overflow:hidden;border:2px solid #f0c850;box-shadow:0 0 26px rgba(240,200,80,.35), 0 10px 30px rgba(0,0,0,.55);background:#0a0a0a;margin:8px 0;">' +
     innerHtml +
     linkOpen +
   '</div>';
@@ -496,7 +496,7 @@ function startPosterSliders() {
       slides[idx].classList.add("active");
       if (dots[idx]) {
         dots[idx].style.width = "18px";
-        dots[idx].style.background = "#f5c451";
+        dots[idx].style.background = "#f0c850";
         dots[idx].classList.add("active");
       }
     }, 3500);
@@ -519,7 +519,7 @@ function startPosterSliders() {
         });
         dots.forEach(function(d, di) {
           d.style.width = di === target ? "18px" : "6px";
-          d.style.background = di === target ? "#f5c451" : "rgba(255,255,255,.45)";
+          d.style.background = di === target ? "#f0c850" : "rgba(255,255,255,.45)";
           d.classList.toggle("active", di === target);
         });
       });
@@ -657,14 +657,14 @@ function closeDetail() {
   document.body.classList.remove("detail-open");
   currentDetailProductId = null;
 
-  document.title = "Shree Shiv Alankar Mandir — Trusted Jewellery Shop in Marihan, Mirzapur";
+  document.title = "Shree Shiv Alankar Mandir — Trusted Jewellery Shop in Marihan, Mirzapur, Uttar Pradesh - 231210";
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute("content",
-      "Shree Shiv Alankar Mandir — Trusted jewellery shop in Marihan, Mirzapur. Gold, silver and diamond jewellery with hallmark certification.");
+      "Shree Shiv Alankar Mandir — Trusted jewellery shop in Marihan, Mirzapur, Uttar Pradesh - 231210. Gold, silver and diamond jewellery with hallmark certification.");
   }
   const canonical = document.getElementById("canonicalLink");
-  if (canonical) canonical.setAttribute("href", "https://shree-shiv-alankar.pages.dev/");
+  if (canonical) canonical.setAttribute("href", "https://shree-shiv-alankar-mandir.pages.dev/");
   const oldSchema = document.getElementById("productSchema");
   if (oldSchema) oldSchema.remove();
   const oldBC = document.getElementById("breadcrumbSchema");
@@ -689,7 +689,7 @@ function renderDetail(productId) {
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute("content",
-      (p.name || "") + " available at Shree Shiv Alankar Mandir, Marihan, Mirzapur. " +
+      (p.name || "") + " available at Shree Shiv Alankar Mandir, Marihan, Mirzapur, Uttar Pradesh - 231210. " +
       (p.description || "").slice(0, 140) + " Contact us on WhatsApp.");
   }
 
@@ -706,7 +706,7 @@ function renderDetail(productId) {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": p.name,
-      "description": p.description || "Available at Shree Shiv Alankar Mandir, Marihan, Mirzapur.",
+      "description": p.description || "Available at Shree Shiv Alankar Mandir, Marihan, Mirzapur, Uttar Pradesh - 231210.",
       "image": (p.images && p.images[0]) ? p.images[0] : "",
       "brand": {
         "@type": "Brand",
@@ -718,13 +718,14 @@ function renderDetail(productId) {
           ? "https://schema.org/OutOfStock"
           : "https://schema.org/InStock",
         "seller": {
-          "@type": "LocalBusiness",
+          "@type": "JewelryStore",
           "name": "Shree Shiv Alankar Mandir",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Robertsganj road, Devpura, Bhawa Bazar",
+            "streetAddress": "Robertsganj Road, Devpura, Bhawa Bazar",
             "addressLocality": "Marihan",
-            "addressRegion": "Mirzapur",
+            "addressRegion": "Mirzapur, Uttar Pradesh",
+            "postalCode": "231210",
             "addressCountry": "IN"
           }
         }
@@ -742,8 +743,8 @@ function renderDetail(productId) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shree-shiv-alankar.pages.dev/" },
-      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://shree-shiv-alankar.pages.dev/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shree-shiv-alankar-mandir.pages.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://shree-shiv-alankar-mandir.pages.dev/" },
       { "@type": "ListItem", "position": 3, "name": p.name }
     ]
   });
