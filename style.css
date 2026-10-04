@@ -1875,3 +1875,30 @@ body.rc-open .rc-fab{
     transition:none !important;
   }
 }
+/* =========================================================
+   MAIN BUTTONS — Skeleton loading state
+   ========================================================= */
+.fm-main-btn.fm-loading{
+  pointer-events:none;
+}
+.fm-main-btn.fm-loading .fm-main-label{
+  display:block;
+  width:55%;
+  height:10px;
+  border-radius:5px;
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,.10) 0%,
+    rgba(255,255,255,.32) 50%,
+    rgba(255,255,255,.10) 100%
+  );
+  background-size:200% 100%;
+  animation:fmBtnShimmer 1.4s ease-in-out infinite;
+  text-indent:-9999px;
+  overflow:hidden;
+  padding:0;
+}
+@keyframes fmBtnShimmer{
+  0%{ background-position:200% 0; }
+  100%{ background-position:-200% 0; }
+}
