@@ -375,6 +375,72 @@
           </div>
         </div>
       </div>
+        <!-- Rate Calculator -->
+  <div class="tab-panel" id="tab-ratecalculator">
+    <h2 class="section-title">💎 Rate Calculator Settings</h2>
+    <p class="hint-text">
+      Ye calculator customer ke liye index page pe ek floating "Rate" button ke roop me dikhega.
+      Jab wo weight aur purity select karega, to approximate value dikhegi. Gold/Silver ke rates
+      aap yahan set karo — aur jab bhi market rate badle, yahan update karte raho.
+    </p>
+
+    <form id="rateCalcForm" class="admin-form">
+      <label class="stock-check" style="margin-bottom:16px;">
+        <input type="checkbox" id="rcEnabled" checked>
+        <strong>Show "Rate" button on website</strong>
+      </label>
+
+      <h3 class="about-subheading">🥇 Gold Rates (₹ per gram)</h3>
+      <label>24K / 999 — Pure Gold</label>
+      <input type="number" id="rcGold24" min="0" step="0.01" placeholder="e.g. 7500">
+
+      <label>22K / 916 — Standard Gold</label>
+      <input type="number" id="rcGold22" min="0" step="0.01" placeholder="e.g. 6900">
+
+      <label>18K / 750 — Diamond Gold</label>
+      <input type="number" id="rcGold18" min="0" step="0.01" placeholder="e.g. 5600">
+
+      <label>14K / 585 — Light Gold</label>
+      <input type="number" id="rcGold14" min="0" step="0.01" placeholder="e.g. 4400">
+
+      <h3 class="about-subheading" style="margin-top:24px;">🥈 Silver Rates (₹ per gram)</h3>
+      <label>999 — Pure Silver</label>
+      <input type="number" id="rcSilver999" min="0" step="0.01" placeholder="e.g. 95">
+
+      <label>925 — Sterling Silver</label>
+      <input type="number" id="rcSilver925" min="0" step="0.01" placeholder="e.g. 88">
+
+      <h3 class="about-subheading" style="margin-top:24px;">⚙️ Charges</h3>
+      <label>Making Charge (%)</label>
+      <input type="number" id="rcMakingPercent" min="0" max="100" step="0.1" placeholder="e.g. 12">
+
+      <label>GST (%)</label>
+      <input type="number" id="rcGst" min="0" max="28" step="0.1" placeholder="e.g. 3">
+
+      <label>Hallmark Charge (₹ per piece)</label>
+      <input type="number" id="rcHallmark" min="0" step="1" placeholder="e.g. 45">
+
+      <div class="form-btn-row" style="margin-top:22px;">
+        <button type="submit" id="rcSaveBtn">Save Settings</button>
+        <button type="button" id="rcReloadBtn" class="secondary-btn">Reload</button>
+      </div>
+      <p id="rcSaveStatus" class="upload-status"></p>
+    </form>
+
+    <div class="mb-slot" style="max-width:520px; margin-top:22px;">
+      <h3 class="about-subheading" style="margin-top:0;">💡 Quick Guide</h3>
+      <ul style="list-style:none; padding:0; margin:0; color:#e0dcd4; font-size:.88rem; line-height:1.7;">
+        <li style="padding:5px 0;">✓ <strong style="color:#f0c850;">Gold 22K</strong> — Sabse common jewellery ke liye</li>
+        <li style="padding:5px 0;">✓ <strong style="color:#f0c850;">Gold 18K</strong> — Diamond studded jewellery</li>
+        <li style="padding:5px 0;">✓ <strong style="color:#f0c850;">Silver 925</strong> — Sterling silver jewellery</li>
+        <li style="padding:5px 0;">✓ <strong style="color:#f0c850;">Making charge</strong> — Design ke hisaab se 8% se 18% tak</li>
+        <li style="padding:5px 0;">✓ <strong style="color:#f0c850;">GST</strong> — Currently 3% on jewellery</li>
+        <li style="padding:5px 0;">✓ <strong style="color:#f0c850;">Hallmark</strong> — BIS hallmark ka charge per piece</li>
+      </ul>
+    </div>
+  </div>
+
+    </main>
 
     </main>
   </section>
