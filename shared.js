@@ -82,16 +82,18 @@ function renderFooterFromFirestore() {
 
     var fName = document.getElementById("footerShopName");
     if (fName) fName.textContent = shopName;
+
     var fTag = document.getElementById("footerTagline");
     if (fTag) fTag.textContent = d.footerTagline || "Timeless jewellery, trusted since generations.";
 
-    // SEO line — NO address (avoid duplication)
+    /* SEO line — short, keyword-rich, NO full address (avoid duplicate) */
     var fSeo = document.getElementById("footerSeoLine");
     if (fSeo) fSeo.textContent = "Sree Shiv Alankar Mandir — Hallmark Certified Gold, Silver & Diamond Jewellery";
 
-    // Address line — ONLY place where full address shows
+    /* Address line — ONLY place where full address shows */
     var fAddr = document.getElementById("footerAddressLine");
     if (fAddr) fAddr.textContent = address;
+
     var cAddr = document.getElementById("contactAddress");
     if (cAddr) cAddr.textContent = address;
 
