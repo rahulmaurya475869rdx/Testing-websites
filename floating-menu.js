@@ -120,7 +120,10 @@
 
   db.collection("settings").doc("mainButtons").onSnapshot((doc) => {
     applyMainButtons(doc.exists ? doc.data() : {});
-  }, () => applyMainButtons({}));
+  }, () => {
+    // Network error pe skeleton chhod do — data aa jayega baad me
+    // (ya agar admin ne hi kuch set nahi kiya, to skeleton hi dikhega)
+  });
 
   function autoIconFromLabel(label) {
     const l = String(label || "").toLowerCase();
