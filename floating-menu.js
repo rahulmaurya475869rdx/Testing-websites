@@ -89,14 +89,22 @@
   }
 
   function applyMainButtons(cfg) {
+  function applyMainButtons(cfg) {
     Object.keys(buttonEls).forEach((key) => {
       const btn = buttonEls[key];
       if (!btn) return;
       const c = Object.assign({}, mainButtonsCfg[key], (cfg && cfg[key]) || {});
       mainButtonsCfg[key] = c;
 
-      if (c.enabled === false) { btn.style.display = "none"; return; }
+      if (c.enabled === false) {
+        btn.style.display = "none";
+        btn.classList.remove("fm-loading");
+        return;
+      }
       btn.style.display = "";
+
+      // Data aa gaya — skeleton hatao
+      btn.classList.remove("fm-loading");
 
       const iconSvg = c.icon && window.mbwEmojiToSvg ? window.mbwEmojiToSvg(c.icon) : null;
       if (iconSvg) {
