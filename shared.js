@@ -79,7 +79,7 @@ function renderFooterFromFirestore() {
   db.collection("settings").doc("general").get().then(function (doc) {
     var d = doc.exists ? doc.data() : {};
     var shopName = d.shopName || "Shree Shiv Alankar Mandir";
-    var address = d.address || "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur";
+    var address = d.address || "Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar Pradesh-231210";
 
     var fName = document.getElementById("footerShopName");
     if (fName) fName.textContent = shopName;
