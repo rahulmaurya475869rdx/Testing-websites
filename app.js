@@ -892,7 +892,7 @@ if (searchForm) {
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const val = document.getElementById("searchInput").value.trim();
-    if (val.toUpperCase() === "MBW LOGIN") {
+    if (val.toUpperCase() === "SSAM LOGIN") {
       document.getElementById("searchInput").value = "";
       window.location.href = "admin.html";
       return;
