@@ -119,8 +119,11 @@ window.filterByBrand = filterByBrand;
 db.collection("settings").doc("general").get().then((doc) => {
   shopSettings = doc.exists ? doc.data() : {};
   const shopName = shopSettings.shopName || "Shree Shiv Alankar Mandir";
-  const shopEl = document.getElementById("shopNameHeading");
-  if (shopEl) shopEl.textContent = shopName;
+ const shopEl = document.getElementById("shopNameHeading");
+if (shopEl) {
+  shopEl.textContent = shopName;
+  shopEl.setAttribute("data-text", shopName);
+}
   if (shopSettings.tagline) {
     const t = document.getElementById("shopTagline");
     if (t) t.textContent = shopSettings.tagline;
