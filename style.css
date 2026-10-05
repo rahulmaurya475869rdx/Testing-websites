@@ -108,11 +108,61 @@ button, input, select, textarea{ font-family:var(--font-body); }
   letter-spacing: .8px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  color: #f0c850;
-  text-shadow:
-    0 2px 3px rgba(0, 0, 0, .85),
-    0 0 22px rgba(240, 200, 80, .6),
-    0 0 44px rgba(240, 200, 80, .35);
+
+  /* Bright gold gradient across letters */
+  background: linear-gradient(
+    180deg,
+    #fff8d4 0%,
+    #ffe680 18%,
+    #f5c850 42%,
+    #e0a828 62%,
+    #c98a10 82%,
+    #a06a00 100%
+  );
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  /* Deep glow behind the letters */
+  filter:
+    drop-shadow(0 1px 0 rgba(120, 70, 0, .85))
+    drop-shadow(0 2px 4px rgba(0, 0, 0, .55))
+    drop-shadow(0 0 14px rgba(255, 200, 80, .55))
+    drop-shadow(0 0 28px rgba(255, 180, 50, .35));
+}
+
+/* Shine sweep layer — moves across the letters */
+.shop-name-h1::before{
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, .85) 45%,
+    #ffffff 50%,
+    rgba(255, 255, 255, .85) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shopNameShine 4s ease-in-out infinite;
+}
+
+@keyframes shopNameShine{
+  0%   { background-position: 150% 0; }
+  60%  { background-position: -150% 0; }
+  100% { background-position: -150% 0; }
 }
 
 .shop-banner .tagline{
