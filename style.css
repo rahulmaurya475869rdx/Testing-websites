@@ -133,7 +133,7 @@ button, input, select, textarea{ font-family:var(--font-body); }
     drop-shadow(0 0 28px rgba(255, 180, 50, .35));
 }
 
-/* Shine sweep layer — moves across the letters */
+/* Shine sweep layer — smooth slow sweep across letters */
 .shop-name-h1::before{
   content: attr(data-text);
   position: absolute;
@@ -141,30 +141,29 @@ button, input, select, textarea{ font-family:var(--font-body); }
   z-index: 2;
   pointer-events: none;
   background: linear-gradient(
-    100deg,
+    110deg,
     transparent 0%,
-    transparent 35%,
-    rgba(255, 255, 255, .85) 45%,
-    #ffffff 50%,
-    rgba(255, 255, 255, .85) 55%,
-    transparent 65%,
+    transparent 40%,
+    rgba(255, 255, 255, .55) 46%,
+    rgba(255, 255, 255, .95) 50%,
+    rgba(255, 255, 255, .55) 54%,
+    transparent 60%,
     transparent 100%
   );
-  background-size: 250% 100%;
-  background-position: 150% 0;
+  background-size: 300% 100%;
+  background-position: 200% 0;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: shopNameShine 4s ease-in-out infinite;
+  animation: shopNameShine 6s linear infinite;
 }
 
 @keyframes shopNameShine{
-  0%   { background-position: 150% 0; }
-  60%  { background-position: -150% 0; }
-  100% { background-position: -150% 0; }
+  0%   { background-position: 200% 0; }   /* start: off-screen right */
+  70%  { background-position: -200% 0; }  /* end: off-screen left */
+  100% { background-position: -200% 0; }  /* pause */
 }
-
 .shop-banner .tagline{
   position: relative;
   z-index: 1;
