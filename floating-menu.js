@@ -1,7 +1,7 @@
 /* =========================================================
-   MBW Floating Menu
-   Fixed positions — right side cluster. Drag allowed but not saved.
-   orderBy removed — client-side sort
+   Sree Shiv Alankar Mandir — Floating Menu
+   Fixed positions. Drag allowed but not saved.
+   Skeleton loading + Firestore-driven names
    ========================================================= */
 (function setupFloatingMenu() {
   const buttonEls = {
@@ -26,6 +26,7 @@
   let allBrands = [];
   let isOpen = false;
   let closeTimer = null;
+  let dataLoaded = false;
 
   try {
     localStorage.removeItem("mbw_mainbtn_b1_pos");
@@ -89,22 +90,21 @@
   }
 
   function applyMainButtons(cfg) {
-  function applyMainButtons(cfg) {
+    dataLoaded = true;
     Object.keys(buttonEls).forEach((key) => {
       const btn = buttonEls[key];
       if (!btn) return;
       const c = Object.assign({}, mainButtonsCfg[key], (cfg && cfg[key]) || {});
       mainButtonsCfg[key] = c;
 
+      // ALWAYS remove skeleton first
+      btn.classList.remove("fm-loading");
+
       if (c.enabled === false) {
         btn.style.display = "none";
-        btn.classList.remove("fm-loading");
         return;
       }
       btn.style.display = "";
-
-      // Data aa gaya — skeleton hatao
-      btn.classList.remove("fm-loading");
 
       const iconSvg = c.icon && window.mbwEmojiToSvg ? window.mbwEmojiToSvg(c.icon) : null;
       if (iconSvg) {
@@ -118,11 +118,19 @@
     });
   }
 
+  // Safety timeout — agar 5 sec me Firestore se data nahi aaya,
+  // to defaults dikha do (skeleton forever nahi dikhega)
+  setTimeout(() => {
+    if (!dataLoaded) {
+      applyMainButtons({});
+    }
+  }, 5000);
+
   db.collection("settings").doc("mainButtons").onSnapshot((doc) => {
     applyMainButtons(doc.exists ? doc.data() : {});
   }, () => {
-    // Network error pe skeleton chhod do — data aa jayega baad me
-    // (ya agar admin ne hi kuch set nahi kiya, to skeleton hi dikhega)
+    // Error pe bhi skeleton hatao aur defaults dikha do
+    applyMainButtons({});
   });
 
   function autoIconFromLabel(label) {
@@ -151,8 +159,8 @@
     if (/(info|about|help|support)/.test(l)) return "ℹ️";
     if (/(service|repair|fix|mechanic)/.test(l)) return "🛠️";
     if (/(warranty|guarantee|verify)/.test(l)) return "✅";
-    if (/(exide)/.test(l)) return "🔋";
-    if (/(amaron|livguard|luminous|okaya|microtek)/.test(l)) return "⚡";
+    if (/(gold|diamond|jewel|ring|necklace)/.test(l)) return "💎";
+    if (/(silver)/.test(l)) return "🥈";
     return "✨";
   }
 
@@ -384,7 +392,6 @@
       dragging = false;
       btn.classList.remove("fm-dragging");
       try { btn.releasePointerCapture(e.pointerId); } catch (err) {}
-      // Position save NAHI hoti — reload pe reset
     }
 
     btn.addEventListener("pointerup", endDrag);
@@ -421,7 +428,6 @@
     if (e.key === "Escape" && isOpen) closeOverlay();
   });
 
-  /* ---- Firestore listeners (orderBy removed — client-side sort) ---- */
   db.collection("floating_menu").onSnapshot((snap) => {
     allFloatingItems = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     allFloatingItems.sort((a, b) => (a.order || 0) - (b.order || 0));
