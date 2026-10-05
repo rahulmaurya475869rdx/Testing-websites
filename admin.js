@@ -161,18 +161,14 @@ const PAGE_STARTERS = {
     { type: "list", title: "Products & Pricing", items: ["All products are genuine and hallmark certified","Prices are for reference only","Product images are for illustration","Stock availability changes"] },
     { type: "text", title: "Contact", text: "Shree Shiv Alankar Mandir, Robertsganj road, Devpura, Bhawa Bazar, Marihan, Mirzapur, Uttar pradesh - 231210." }
   ],
-  developer: [
-    { type: "text", title: "Rahul Maurya", text: "Designer & Developer of Shree Shiv Alankar Mandir website." },
-    { type: "text", title: "About Me", text: "I design and build clean, fast and modern websites for small businesses. From beautiful storefronts to admin panels, I help shops take their business online." },
-    { type: "list", title: "What I Do", items: ["Website Design","Web Development","Firebase Backend","Cloudinary Media","Cloudflare Hosting"] },
-    { type: "text", title: "Contact Me", text: "You can reach me via WhatsApp or Email. I'd love to hear from you." }
-  ]
 };
 
 function initPageEditors() {
   document.querySelectorAll(".page-editor").forEach((container) => {
     const pageKey = container.getAttribute("data-page");
-    if (pageKey) buildPageEditorUI(container, pageKey);
+    if (pageKey && pageKey !== "developer") {
+      buildPageEditorUI(container, pageKey);
+    }
   });
 }
 
